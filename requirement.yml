@@ -1,0 +1,19 @@
+---
+- name: Install Required Packages
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt repository
+      apt:
+        update_cache: yes
+
+    - name: Install general dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - unzip
+        - curl
+        - composer

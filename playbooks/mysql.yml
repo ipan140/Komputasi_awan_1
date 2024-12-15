@@ -1,0 +1,28 @@
+---
+- name: Configure MySQL Database
+  hosts: db
+  become: yes
+
+  tasks:
+    - name: Install MySQL Server
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Start MySQL Service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Create Database
+      mysql_db:
+        name: php_native_app
+        state: present
+
+    - name: Create Database User
+      mysql_user:
+        name: php_user
+        password: php_password
+        priv: 'php_native_app.*:ALL'
+        state: present

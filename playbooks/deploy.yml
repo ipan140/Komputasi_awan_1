@@ -1,0 +1,32 @@
+---
+- name: Deploy PHP Native Application
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install PHP
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - php
+        - libapache2-mod-php
+        - php-mysql
+
+    - name: Copy application files
+      copy:
+        src: C:/ProgramData/Jenkins/.jenkins/workspace/komputasi-awan-1
+        dest: /var/www/html
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
