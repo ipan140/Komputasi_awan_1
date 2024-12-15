@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'WDC-V2', url: 'https://github.com/ipan140/Komputasi_awan_1'
+                git branch: 'iya', url: 'https://github.com/ipan140/Komputasi_awan_1'
             }
         }
 
